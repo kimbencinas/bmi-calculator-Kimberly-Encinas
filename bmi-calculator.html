@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<title>BMI Calculator</title>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+  <div class="flex-container">
+    <div class="main-wrapper">
+      <div class="form-header">
+        <div id="bmi-us" class="bmi-unit active-head">
+          <h2>BMI Calculator</h2>
+        </div>
+      </div>
+      <form class="bmi-form">
+        <div class="input-form">
+          <label for="age">Age:</label>
+          <input type="text" class="input-form" name="age" placeholder="Enter your age" required>
+        </div><br>
+        <div class="input-form">
+          <label for="gender">Gender:</label><br>
+          <input type="radio" class="input-form" name="gender" value="female">
+          <label class="text">Female</label>
+          <input type="radio" class="input-form" name="gender" value="male">
+          <label class="text">Male</label>
+        </div><br>
+        <div class="input-form">
+          <label for="height">Height:</label>
+          <input type="text" class="input-form" name="height" size="18" placeholder="Enter your height (in)" required>
+        </div><br>
+        <div class="input-form">
+          <label for="weight">Weight: </label>
+          <input type="text" class="input-form" name="weight" size="17" placeholder="Enter your weight (lb)" required>
+        </div><br>
+        <div class="buttons">
+          <button class="calculate" id="submit" onclick="calculateBMI()">Calculate</button>
+        </div>
+      </form>
+      <div id="bmi-calculation"></div>
+    </div>
+  </div>
+  <script>
+    function calculateBMI() {
+      event.preventDefault();
+
+      const form = document.getElementsByClassName("bmi-form")[0];
+      const age = parseInt(form.elements.age.value);
+      const gender = form.elements.gender.value;
+      const height = parseFloat(form.elements.height.value);
+      const weight = parseFloat(form.elements.weight.value);
+
+      let bmi = 0;
+
+      if (height && weight) {
+        if (gender == "female") {
+          bmi = 703 * (weight / Math.pow(height, 2));
+        } else if (gender == "male") {
+          bmi = 703 * (weight / Math.pow(height, 2));
+        }
+
+        bmi = bmi.toFixed(1);
+
+        const result = document.getElementById("bmi-calculation");
+        result.textContent = "BMI: " + bmi;
+      } else {
+        alert("Enter valid values.");
+      }
+    }
+  </script>
+</body>
+
+</html>
